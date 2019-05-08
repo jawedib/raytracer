@@ -138,6 +138,7 @@ glm::vec3 getColor(const glm::vec3& intersection_position, const glm::vec3& inte
 		}
 	}
 	
+	//REFLECTION CALCULATION
 	glm::vec3 intersection_position2;
 	glm::vec3 reflection_ray_dir;
 
@@ -151,14 +152,16 @@ glm::vec3 getColor(const glm::vec3& intersection_position, const glm::vec3& inte
 		float distance = objects.at(i)->Intersect(reflection_ray);
 		if (distance<minReflectionDistance && distance > accuracy)
 		{
-			minReflectionDistance = distance; // we record the length of the shadow ray here to the obstructing object
-			closestReflectionObject = i; //in the end, if there was an obstruction, the ith object in the vector is the closest to the shadow ray
+			minReflectionDistance = distance; // we record the length of the reflection ray here to the intersecting object
+			closestReflectionObject = i; //in the end, if there was an intersection, the ith object in the vector is the closest to the shadow ray
 			intersection_position2 = intersection_position + (reflection_ray_dir * minReflectionDistance);
 		}
 	}
 
 	if (closestReflectionObject >= 0)
 	{
+		//the variable 'target' is where the reflection ray bounced to, so in the end we mix the color depending on the shininess of the object, the
+		//object color and the reflection color
 		float reflect = glm::clamp(((objshininess / 20)), float(0), float(1.00)); //OPTIMAL SETTINGS
 		glm::vec3 target = getColor(intersection_position2, reflection_ray_dir, objects, lights, closestReflectionObject);
 		result = ((result * (1 - reflect)) + (target * reflect));
@@ -249,19 +252,6 @@ int main()
 	glm::vec3* pixelvec = new glm::vec3[allPixels];
 	
 	const clock_t begin_time = clock();
-	
-	//int thread_count = 21;
-
-	//vector<thread> threads;
-
-	//for (int i = 0; i < thread_count; i++)
-	//{
-	//	threads.push_back(thread(rayTrace, i*(width / thread_count), (i + 1)*(width / thread_count), scene, pixelvec));
-	//}
-
-	////
-
-	//for (auto& th : threads) th.join();
 
 
 	rayTrace(width, height, scene, pixelvec);
