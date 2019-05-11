@@ -2,7 +2,7 @@
 
 A C++ ray tracer with the focus on rendering realistic images at low CPU cost regardless of the amount of dynamic lighting in the scenery. 
 Example:
-![sample image](https://github.com/jawedib/raytracer/blob/master/sampleImage.jpg?raw=true)
+![sample image](https://github.com/jawedib/raytracer/blob/master/sample.jpg?raw=true)
 
 
 
