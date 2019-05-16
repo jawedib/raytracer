@@ -1,0 +1,45 @@
+7
+camera
+pos: 0 -3 0
+fov: 60
+f: 1200
+a: 1.33
+sphere
+pos: 0 0 -100
+rad: 10
+amb: 0.8 0.3 0.4
+dif: 0.8 0.3 0.4
+spe: 0.8 0.3 0.4
+shi: 2
+sphere
+pos: -10 0 -40
+rad: 10
+amb: 0.3 0.8 0.4
+dif: 0.3 0.8 0.4
+spe: 0.3 0.8 0.4
+shi: 10
+sphere
+pos: -30 0 -70
+rad: 10
+amb: 0.3 0.4 0.8
+dif: 0.3 0.4 0.8
+spe: 0.3 0.4 0.8
+shi: 4
+sphere
+pos: 13 0 -60
+rad: 10
+amb: 1 1 1
+dif: 1 1 1
+spe: 1 1 1
+shi: 10
+plane
+nor: 0 1 0
+pos: 0 -10 0
+amb: 0.2 0.6 0.2
+dif: 0.2 0.6 0.2
+spe: 0.2 0.6 0.2
+shi: 2
+light
+pos: -20 80 -100
+dif: 0.5 0.5 0.5
+spe: 0.5 0.5 0.5
