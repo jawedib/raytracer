@@ -4,7 +4,6 @@
 #include <thread>
 #include <iostream>
 #include <vector>
-using namespace std;
 
 
 const double accuracy = 0.0005;
@@ -22,7 +21,7 @@ float normalizeColor(const float &color)
 	return color;
 }
 
-void writeImage(glm::vec3* pixels, const int &width, const int &height, const string &FileName)
+void writeImage(glm::vec3* pixels, const int &width, const int &height, const std::string &FileName)
 {
 	cimg_library::CImg<float> image(width, height, 1, 3, 0);
 	for (int x = 0; x < width; x++)
@@ -48,7 +47,7 @@ void writeImage(glm::vec3* pixels, const int &width, const int &height, const st
 	}
 }
 
-glm::vec3 getColor(const glm::vec3& intersection_position, const glm::vec3& intersection_direction, const vector<Object*>& objects, const vector<Light*>& lights, const int& index)
+glm::vec3 getColor(const glm::vec3& intersection_position, const glm::vec3& intersection_direction, const std::vector<Object*>& objects, const std::vector<Light*>& lights, const int& index)
 {
 	
 	//object ambient color which gets applied regardless of light hitting the object
@@ -114,14 +113,14 @@ glm::vec3 getColor(const glm::vec3& intersection_position, const glm::vec3& inte
 			if (!shadowed) {
 				glm::vec3 final_color = glm::vec3(0, 0, 0);
 
-				glm::vec3 diffuse = objdiffuse * max((float)0, cosine);
+				glm::vec3 diffuse = objdiffuse * std::max((float)0, cosine);
 
 				glm::vec3 lightAngle = glm::normalize(2 * dot(light_dir, normal) * normal - light_dir);
 				float dotProduct = dot(lightAngle, -intersection_direction);
 
 				// if dotProcut is positive, add light the lights specular AND diffuse properties
 				if (dotProduct > 0) {
-					glm::vec3 specular = objspecular * max((float)0, pow(dotProduct, objshininess));
+					glm::vec3 specular = objspecular * std::max((float)0, pow(dotProduct, objshininess));
 					final_color.x += lights[i]->color.x*(diffuse.x + specular.x);
 					final_color.y += lights[i]->color.y*(diffuse.y + specular.y);
 					final_color.z += lights[i]->color.z*(diffuse.z + specular.z);
@@ -238,13 +237,14 @@ void rayTrace(int windowwidth, int windowheight, const Scene &scene, glm::vec3* 
 }
 
 int main()
-{
-	string FileName = "scene1";
+{	
+	std::string fileName = "scene1.txt";
 	//std::cout << "Enter the scene file name without the '.txt' : ";
 	//std::cin >> FileName;
-	InputReader* inputreader = new InputReader(FileName + ".txt");
+	InputReader* inputreader = new InputReader(fileName);
 
 	Scene scene = inputreader->scene;
+	delete inputreader;
 
 	int width = scene.width;
 	int height = scene.height;
@@ -257,11 +257,11 @@ int main()
 	rayTrace(width, height, scene, pixelvec);
 
 	
-	cout << "Reached end of raycast loop after " << float(clock() - begin_time) / CLOCKS_PER_SEC << " seconds" << endl;
-	writeImage(pixelvec, width, height, FileName);
+	std::cout << "Reached end of raycast loop after " << float(clock() - begin_time) / CLOCKS_PER_SEC << " seconds" << std::endl;
+	writeImage(pixelvec, width, height, fileName);
 
 	delete pixelvec;
-	delete inputreader;
+	
 
 	return 0;
 }
