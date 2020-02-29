@@ -13,7 +13,7 @@ This project started off as a school assignment with the requirement being creat
 
 
 
-Over the winter break I decided to take it to the next level using my own intuition, course notes and being mentally prepared to fail a lot. And indeed there were issues but I at least now I got to where I am now while understanding it inside out. The first success came when I was able to get the reflections work in a sense that objects took on the color of other objects around them with proper depth information provided they are set as shiny objects:
+Over the winter break I decided to take it to the next level using my own intuition and  course notes. The first success came when I was able to get the reflections to work in a sense that objects took on the color of other objects around them with proper depth information provided they are set as shiny objects:
 
 ![first success](https://github.com/jawedib/raytracer/blob/master/progress2.jpg?raw=true)
 
